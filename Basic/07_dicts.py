@@ -10,27 +10,27 @@ my_other_dict = {}
 print(type(my_dict))
 print(type(my_other_dict))
 
-my_other_dict = {"Nombre": "Brais",
-                 "Apellido": "Moure", "Edad": 35, 1: "Python"}
-
-my_dict = {
-    "Nombre": "Brais",
-    "Apellido": "Moure",
-    "Edad": 35,
-    "Lenguajes": {"Python", "Swift", "Kotlin"},
-    1: 1.77
+my_other_dict = {
+    "Name": "Isaias",
+    "Lastname": "Errazabal",
+    "Age": 23,
+    "Active": False,
+    "Lenguajes": {"Python", "JavaScript"}
 }
 
-print(my_other_dict)
-print(my_dict)
+my_dict = {
+    "Name": "Cesar",
+    "Lastname": "Quintana Errazabal",
+    "Age": 23,
+    "Active": False,
+    "Lenguajes": {"Python", "JavaScript", "PHP", "SQL"}
+}
 
-print(len(my_other_dict))
-print(len(my_dict))
 
 # Búsqueda
 
 print(my_dict[1])
-print(my_dict["Nombre"])
+print(my_dict["Name"])
 
 print("Moure" in my_dict)
 print("Apellido" in my_dict)
@@ -52,25 +52,27 @@ print(my_dict)
 
 # Otras operaciones
 
-print(my_dict.items())
-print(my_dict.keys())
-print(my_dict.values())
+print(my_dict.items())  # Devuelve Clave valor en lista y tupla
+print(my_dict.keys())  # Devuelve las claves en lista
+print(my_dict.values())  # Devuelve los valores en lista
+
+my_dict.update ({"Active": False})  # Actualiza / Agrega elemento al diccionario
+
+my_dict.pop ("Active")    # Elimina los datos de la cave especificada
+my_dict.popitem ()    # Elimina el ultimo elemento
+
+my_dict.get ("Nombre")  # Devuelve el valor de la clave
+my_dict.clear ()      # Limpia el diccionario
+
 
 my_list = ["Nombre", 1, "Piso"]
 
-my_new_dict = dict.fromkeys((my_list))
+my_new_dict = dict.fromkeys((my_list), "")  # Crear un diccionario apartir de claves de un iterable, segundo argumento con lo que se va llenar el valor
 print(my_new_dict)
-my_new_dict = dict.fromkeys(("Nombre", 1, "Piso"))
-print((my_new_dict))
-my_new_dict = dict.fromkeys(my_dict)
-print((my_new_dict))
-my_new_dict = dict.fromkeys(my_dict, "MoureDev")
-print((my_new_dict))
 
-my_values = my_new_dict.values()
-print(type(my_values))
+my_dict.setdefault ("Age", 0) # Crea la clave si no esta, solo agrega valor a la clave asociada no cambia ni actualiza sus valores
 
-print(my_new_dict.values())
-print(list(dict.fromkeys(list(my_new_dict.values())).keys()))
-print(tuple(my_new_dict))
-print(set(my_new_dict))
+# Ejemplo
+d = {}
+for n in [1, 2, 3, 4]:
+    d.setdefault(n % 2, []).append(n)

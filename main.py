@@ -1,7 +1,5 @@
+d = {}
+for n in [1, 2, 3, 4]:
+    d.setdefault(n % 2, []).append(n)
 
-new = frozenset ({1, 2, 3, 4})
-new2 = frozenset ({5, 6})
-
-
-print (new.isdisjoint (new2))
-
+print (d)

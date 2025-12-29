@@ -23,6 +23,7 @@ my_set.remove ("Cesar")   # Elimina el elemento del conjunto (si no esta da erro
 my_set.discard ("Quintana")  # Elimina el elemento del conjunto  (No nada error)
 my_set.pop ()           # Elimina un valor aleatorio (devuelve el valor eliminado)
 my_set.clear()          # Limpia el conjunto completo
+my_set.copy ()          # Copia los datos en un nuevo conjunto
 # del my_set     # con del se elimina la caja en memoria
 
 my_set.union (my_set1, {"Yolanda", "Errazabal", 53})  # Devuelve un nuevo conjunto o  "|" en ves del metodo
