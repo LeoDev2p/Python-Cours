@@ -1,4 +1,3 @@
-# Clase en vídeo: https://youtu.be/Kp4Mvapo5kc?t=26619
 
 ### Functions ###
 
@@ -12,17 +11,17 @@ my_function()
 my_function()
 my_function()
 
+# global    --> Para especificar que una variable es global
+
 # Función con parámetros de entrada/argumentos
 
 
-def sum_two_values(first_value: int, second_value):
+def sum_two_values(first_value, second_value):
     print(first_value + second_value)
 
 
 sum_two_values(5, 7)
-sum_two_values(54754, 71231)
 sum_two_values("5", "7")
-sum_two_values(1.4, 5.2)
 
 # Función con parámetros de entrada/argumentos y retorno
 
@@ -33,9 +32,6 @@ def sum_two_values_with_return(first_value, second_value):
 
 
 my_result = sum_two_values(1.4, 5.2)
-print(my_result)
-
-my_result = sum_two_values_with_return(10, 5)
 print(my_result)
 
 # Función con parámetros de entrada/argumentos por clave
@@ -59,6 +55,8 @@ print_name_with_default("Brais", "Moure", "MoureDev")
 
 # Función con parámetros de entrada/argumentos arbitrarios
 
+# *args  ->  si no sabe cuantos argumetnos pasara (lo toma como tupla)
+# **kwargs  -> si no sabe cuantos argumentos clave valor pasara (lo toma como diccinoario)
 
 def print_upper_texts(*texts):
     print(type(texts))
