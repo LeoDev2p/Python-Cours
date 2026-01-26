@@ -125,6 +125,28 @@ DELETE FROM tabla
 WHERE condicion;
 """
 
+# DROP TABLE -> eiminar tabla
+"""
+DROP TABLE nombre_tabla;
+DROP TABLE IF EXISTS nombre_tabla;
+"""
+
+# ALTER TABLE -> Modificar tabla existente agregando una nueva columna uno por uno
+"""
+ALTER TABLE nombre_tabla
+ADD COLUMN nombre_columna TIPO;
+
+OJO: NO puedes agregar una columna NOT NULL sin valor por defecto
+
+------------------ Renombrar columna ------------------
+ALTER TABLE nombre_tabla
+RENAME COLUMN length_minutes TO duration;
+
+------------------ Renombrar tabla ------------------
+ALTER TABLE nombre_tabla
+RENAME TO films;
+"""
+
 
 #  ***************** Operadores especiales **************
 
@@ -169,29 +191,6 @@ SELECT DISTINCT columna
 FROM tabla;
 """
 
-# DROP TABLE -> eiminar tabla
-"""
-DROP TABLE nombre_tabla;
-DROP TABLE IF EXISTS nombre_tabla;
-"""
-
-# ALTER TABLE -> Modificar tabla existente agregando una nueva columna uno por uno
-"""
-ALTER TABLE nombre_tabla
-ADD COLUMN nombre_columna TIPO;
-
-OJO: NO puedes agregar una columna NOT NULL sin valor por defecto
-
------------------- Renombrar columna ------------------
-ALTER TABLE nombre_tabla
-RENAME COLUMN length_minutes TO duration;
-
------------------- Renombrar tabla ------------------
-ALTER TABLE nombre_tabla
-RENAME TO films;
-"""
-
-
 # -----------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------
 # -------------------------------- SQLite 3  NIVEL INTERMEDIO ----------------------------
@@ -229,9 +228,14 @@ WHERE columna IS NULL;
 WHERE columna IS NOT NULL;
 """
 
+# * Funciones de agregación *
 # ROUND() --> Redondear valores numéricos
 """
 SELECT ROUND (COUNT(columna)) FROM tabla;
+"""
+# GROUP_CONCAT() --> Concatenar valores de una columna en una sola cadena separada por comas
+"""
+SELECT GROUP_CONCAT(columna) FROM tabla;
 """
 
 # COUNT() --> Contar el número de filas que cumplen una condición específica
@@ -299,8 +303,52 @@ OJO: lo recomnendable usar alias de columnas en el ORDER BY
 # * 1 a muchos (1:N)   .> Foreign Key
 # *-  director -> muchas peliculas |  una pelicula  -> un director
 
+"""
+--> La tabla hija usa la misma PK que la tabla padre como FK y PK.
+
+movies (
+  id INTEGER PRIMARY KEY,
+  title TEXT,
+  year INT,
+  rating REAL
+)
+
+movie_details (
+  movie_id INTEGER PRIMARY KEY,  
+  duration INT,
+  budget REAL,
+  language TEXT,
+  FOREIGN KEY (movie_id) REFERENCES movies(id)
+)
+
+"""
+
 # * Muchos a muchos (N:M)
 # *- pelicula -> muchos actores  |  un actor -> actua en muchas peliculas <-
+
+"""
+CREATE TABLE actors (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL
+);
+
+CREATE TABLE movies_actors (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	movie_id INTEGER,
+	actor_id INTEGER
+
+    FOREIGN KEY (movie_id) REFERENCES movies (id)
+    FOREIGN KEY (actor_id) REFERENCES actors (id)
+);
+
+CREATE TABLE movies (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	title TEXT NOT NULL,
+	year INTEGER,
+	director_id INTEGER,
+    
+);
+"""
 
 # * 1 a 1 (1:1)
 # *- estudiante -> tiene un DNI  |  DNI ->  pertence estudiante
@@ -341,23 +389,80 @@ LIMIT ...
 """
 
 # LEFT JOIN --> “Tráeme TODO de la tabla izquierda + los que no coinciden”
-# RIGHT JOIN --> “Tráeme TODO de la tabla derecha + los que no coinciden”
 """
 SELECT columnas
 FROM tabla_izquierda
-LEFT/RIGHT JOIN tabla_derecha
+LEFT JOIN tabla_derecha
 ON condicion;
 """
 
-# FULL JOIN --> “Tráeme izquierda + derecha, aunque no tengan relación” en SQLITE no existe lo simulamos con UNION
+# Subconsultas --> Consulta dentro de otra consulta
+
+#* Subconsulta en un WHERE	
 """
-SELECT ...
-FROM movies m
-LEFT JOIN directors d ON m.director_id = d.id
+--> **** Comparar con un valor calculado (100% pre devulve una sola columna y una sola fila)
 
-UNION
+SELECT columnas
+FROM tabla
+WHERE columna operador (SELECT columna FROM tabla);
+"""
 
-SELECT ...
+#* Subconsulta en un IN
+"""
+--> **** Comparar con una lista de valores (una columna)
+
+SELECT columnas
+FROM tabla
+WHERE columna IN (SELECT columna FROM tabla);
+"""
+
+#* EXISTS --> Verificar la existencia de al menos una filas que cumplan una condición específica
+"""
+SELECT columnas
+FROM tabla_externa
+WHERE EXISTS (
+    SELECT 1
+    FROM tabla_interna
+    WHERE condición_relacionada
+);
+"""
+
+#* ALL --> Comparar si todos los devuelto por una subconsulta cumplen
+#* ANY --> Comparar si al menos un valor devuelto por una subconsulta cumple
+"""
+SELECT columnas
+FROM tabla_externa
+WHERE columna comparacion ALL/ANY (subconsulta);
+"""
+
+#* Subconsulta en un SELECT
+"""
+--> **** Debe devolver una sola columna y sola fila normalmente
+
+SELECT columna,
+       (SELECT algo FROM tabla) AS nombre_columna
+FROM tabla;
+"""
+
+#* Subconsulta en un FROM
+"""
+--> **** Crea una tabla temporal con la misma cantidad de columnas del SELECT normal
+
+SELECT columnas
+FROM (SELECT ...) AS alias
+WHERE condición;
+"""
+
+#* Subconsulta correlacionada 
+"""
+--> ****  Comparar cada fila con su propio grupo
+
+SELECT d.name, m.title, m.rating
 FROM movies m
-RIGHT JOIN directors d ON m.director_id = d.id;
+INNER JOIN directors d ON m.director_id = d.id
+WHERE m.rating = (
+    SELECT MAX(m2.rating)
+    FROM movies m2
+    WHERE m2.director_id = m.director_id
+);
 """
