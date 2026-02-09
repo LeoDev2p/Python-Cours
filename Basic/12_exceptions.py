@@ -5,8 +5,8 @@
 Sintaxis
 
 try:
-    bloque de codico
-except:  -> Espeicifca el tipo de error a capturar
+    bloque de codigo
+except:  -> Especifca el tipo de error a capturar
 else: -> en caso no se ejecute el try/except
 finally: -> se ejecuta siempre si o si
 """
@@ -59,28 +59,17 @@ except Exception as my_random_error_name:
     print(my_random_error_name)
 
 
-## ------------------ Lanzar una excepcion --------------------
+## ------------------ Lanzar una excepcion -> raise <- --------------------
 
+# La raisepalabra clave se utiliza para generar una excepción.
+# Puede definir qué tipo de error generar y el texto que se le mostrará al usuario.
 
-"""
-   CONSIDERACIONES EN LAS EXCEPCIONES
+# Genera un TypeError si x no es un entero:
+x = "hello"
 
-✔ Tus validaciones NO deben estar en la excepción
-✔ Tus print() NO deben estar en la excepción
-✔ Las excepciones NO validan
-✔ Las excepciones solo informan del error
-✔ La lógica valida → lanza
-✔ El controlador captura → muestra
+if not type(x) is int:
+  raise TypeError("Sólo se permiten números enteros")
 
-🧩 Analogía (muy clara)
-
-Piensa en una excepción como:
-
-🚨 Una alarma de incendio
-❌ La alarma no apaga el fuego
-❌ La alarma no llama a los bomberos
-❌ La alarma no imprime mensajes
-"""
 
 # raise  ->  permite lanzar una excepcion
 
@@ -94,6 +83,7 @@ x = "hello"
 
 if not type(x) is int:
   raise TypeError("Sólo se permiten números enteros")
+
 
 
 ## ----------------------- Creando excepciones propias ---------------------
@@ -170,4 +160,25 @@ BaseException
 
 
 👉 Nunca captures BaseException
+"""
+
+
+"""
+   CONSIDERACIONES EN LAS EXCEPCIONES AVANZADOS
+
+✔ Tus validaciones NO deben estar en la excepción
+✔ Tus print() NO deben estar en la excepción
+✔ Las excepciones NO validan
+✔ Las excepciones solo informan del error
+✔ La lógica valida → lanza
+✔ El controlador captura → muestra
+
+🧩 Analogía (muy clara)
+
+Piensa en una excepción como:
+
+🚨 Una alarma de incendio
+❌ La alarma no apaga el fuego
+❌ La alarma no llama a los bomberos
+❌ La alarma no imprime mensajes
 """

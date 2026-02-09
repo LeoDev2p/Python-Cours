@@ -167,7 +167,7 @@ if __name__ == "__main__":
                 try:
                     Mostrar_alumnos ()
                 except json.JSONDecodeError as e:
-                    print (jd.msg, jd.lineno, jd.colno)
+                    print (e.msg, e.lineno, e.colno)
             case 4:
                 try:
                     codigo = input ("Codigo: ")
