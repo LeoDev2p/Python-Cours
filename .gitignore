@@ -1,3 +1,6 @@
 __pycache__/
 *.py[cod]
-prueba.py
+/prueba.py
+*.json
+*.txt
+*.csv

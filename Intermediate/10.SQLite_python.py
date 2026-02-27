@@ -94,3 +94,30 @@ with sqlite3.connect("example.db") as conn:
         WHERE title = ?
     """, ("Interstellar",)
     )
+
+#* Excepciones de sqlite3
+"""
+- sqlite3.IntegrityError
+    - UNIQUE Constraint failed: Intentas insertar un username que ya existe o repetir la pareja (id_user, id_project) en tu tabla intermedia.
+    - NOT NULL Constraint failed: Intentas crear una tarea sin ponerle un título (title).
+    - FOREIGN KEY Constraint failed: Intentas asignar una tarea a un id_user que no existe en la tabla users (requiere PRAGMA foreign_keys = ON).
+    - CHECK Constraint failed: Intentas insertar un usuario con un rol que no sea 'admin' o 'user' (si añadiste el CHECK que sugerimos).
+
+- sqlite3.OperationalError
+    - no such table / no such column: Escribiste mal el nombre de la tabla tasks o pediste una columna que no existe.
+    - database is locked: Tienes la base de datos abierta en otro programa (como DB Browser) y Python intenta escribir al mismo tiempo.
+    - unable to open database file: El archivo .db no tiene permisos de escritura o la ruta es incorrecta.
+    - syntax error: Te faltó una coma , o un paréntesis ) en tu cadena de texto SQL.
+
+- sqlite3.ProgrammingError
+    - Incorrect number of bindings: Pusiste 3 signos de interrogación ? en el query, pero en los args solo pasaste 2 valores.
+    - Cannot operate on a closed connection: Intentas hacer un execute() después de que el bloque with cerró la conexión.
+    - Un-hashable type: Intentas pasar una lista completa como un solo parámetro en lugar de una tupla o valor simple.
+
+- sqlite3.DatabaseError
+    - File is not a database: El archivo que intentas abrir es un .txt renombrado a .db o está vacío.
+    - Database disk image is malformed: El archivo se corrompió (por ejemplo, se apagó la PC mientras escribía).
+
+- sqlite3.Error
+    - Se usa en el except cuando quieres capturar cualquier error de SQLite sin importar cuál sea. Es útil para hacer un log general antes de cerrar la app.
+"""
