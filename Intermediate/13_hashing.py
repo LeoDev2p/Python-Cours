@@ -8,9 +8,14 @@ from argon2 import PasswordHasher
 
 ph = PasswordHasher(
     time_cost=3,  # Cuántas vueltas / capas de mescla q' tendra la contraseña (CPU)
-    memory_cost=15360,  # 15MB de RAM ((cantidad de ram a usar en cada vuelta)
+    memory_cost=65536,  # 64MB de RAM ((cantidad de ram a usar en cada vuelta) (128 MB -> 131072 kb)
     parallelism=1,  # cantidad de hilos/nucelos a usar
+    hash_len = 32, # longitud del hash resultante
+    salt_len = 16, # longitud del salt generado (aleatorio)
+    encoding = 'utf-8' # codificacion del hash resultante (utf-8, latin-1, ascii
 )
+
+# OJO: el tiempo del time_cst debe eestar entre 200 y 500 ms, para que el usuairo no espere mucho
 
 hash = ph.hash("Contraseña")  # True
 print(hash)

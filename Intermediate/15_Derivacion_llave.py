@@ -19,8 +19,10 @@ kdf = PBKDF2HMAC(
     algorithm=hashes.SHA256(), # Usamos SHA256 como motor de hash
     length=32,                  # ¡IMPORTANTE! Fernet exige exactamente 32 bytes
     salt=salt_bytes,            # El salt que recuperamos
-    iterations=480000,          # Recomendado por OWASP (hace que sea lento para hackers)
+    iterations=600000,          # Recomendado por OWASP (hace que sea lento para hackers)
 )
+
+    # OJO: SHA256 minmo de iteracion 600 000 y para SHA512 minimo de 210 000
 
 # 3. Derivar la llave (Aquí ocurre la magia)
 # Esta función "estira" la contraseña y genera 32 bytes aleatorios basados en ella

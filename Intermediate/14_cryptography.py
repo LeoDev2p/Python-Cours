@@ -5,7 +5,7 @@ Documentacion
 from cryptography.fernet import Fernet
 
 # creamos la llave solo una vez guardarlo
-key = Fernet.generate_key()  # devulve una llave en byte b'hhdjsseiurieur....'
+key = Fernet.generate_key()  # devulve una llave en byte b'hhdjsseiurieur....' 32 bytes = 256 bits
 
 # Instanciamos Fernet con nuestra clave maestra
 f = Fernet(key)
@@ -31,7 +31,7 @@ def decrypt_data(token: bytes) -> str:
 
 
 """
-cryptography.fernet.InvalidToken : Si el [nombre del token] tokenes inválido de alguna manera, se lanza esta excepción. Un token puede ser inválido por diversas razones: es más antiguo que el [nombre del token] ttl, está malformado o no tiene una firma válida.
+cryptography.fernet.InvalidToken : si la Llave es incorrecta, El Token ha sido manipulado, o el Token ha expirado con el parametro ttl (si se usó un tiempo de vida), Tocken mal formado
 
 TypeError – Esta excepción se genera si token no es bytes o str.
 """

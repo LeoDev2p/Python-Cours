@@ -10,7 +10,7 @@ from pathlib import Path
 log_dir = Path("logs")
 log_dir.mkdir(exist_ok=True)
 
-# 2. CONFIGURACIÓN CENTRALIZADA
+#* FORMA 1 DE CONFIGURAR ...............................
 logging.basicConfig(
     # 'level' define el filtro de importancia. INFO captura INFO, WARNING, ERROR y CRITICAL.
     level=logging.INFO, 
@@ -40,6 +40,38 @@ logger = logging.getLogger("AppGestion")
 
 # Ejemplo de uso:
 logger.info("El sistema de logging se ha iniciado correctamente.")
+
+
+#* FORMA 2 DE CONFIGURAR  RECOMENDABLE..............................................
+
+def get_logger(name):
+    logger = logging.getLogger(name)
+    
+    # Importante: Si el logger ya tiene handlers, no agregues más
+    if not logger.handlers:
+        logger.setLevel(logging.INFO)
+        
+        # Formato común
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        )
+
+        # Handler de Archivo
+        file_h = logging.FileHandler("Logs/app.log", encoding='utf-8')
+        file_h.setFormatter(formatter)
+        
+        # Handler de Consola
+        stream_h = logging.StreamHandler()
+        stream_h.setFormatter(formatter) # <-- Corregido aquí
+
+        logger.addHandler(file_h)
+        logger.addHandler(stream_h)
+        
+        # Evita que el mensaje suba al logger raíz y se duplique
+        logger.propagate = False 
+        
+    return logger
 
 
 # Algunos de los formateadores
