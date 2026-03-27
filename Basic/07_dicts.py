@@ -63,6 +63,7 @@ my_dict.popitem ()    # Elimina el ultimo elemento
 
 my_dict.get ("Nombre")  # Devuelve el valor de la clave
 my_dict.clear ()      # Limpia el diccionario
+new_dict = my_dict.copy()  # Copia los datos al nuevo destino
 
 
 my_list = ["Nombre", 1, "Piso"]
@@ -70,7 +71,7 @@ my_list = ["Nombre", 1, "Piso"]
 my_new_dict = dict.fromkeys((my_list), "")  # Crear un diccionario apartir de claves de un iterable, segundo argumento con lo que se va llenar el valor
 print(my_new_dict)
 
-my_dict.setdefault ("Age", 0) # Crea la clave si no esta, solo agrega valor a la clave asociada no cambia ni actualiza sus valores
+my_dict.setdefault ("Age", 0) # Crea la clave si no esta, solo agrega valor a la clave asociada por default
 
 # Ejemplo
 d = {}

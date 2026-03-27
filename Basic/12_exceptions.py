@@ -1,4 +1,3 @@
-
 # Excepción base: try except
 
 """
@@ -10,7 +9,6 @@ except:  -> Especifca el tipo de error a capturar
 else: -> en caso no se ejecute el try/except
 finally: -> se ejecuta siempre si o si
 """
-
 
 
 numberOne = 5
@@ -61,14 +59,14 @@ except Exception as my_random_error_name:
 
 ## ------------------ Lanzar una excepcion -> raise <- --------------------
 
-# La raisepalabra clave se utiliza para generar una excepción.
+# La raise palabra clave se utiliza para generar una excepción.
 # Puede definir qué tipo de error generar y el texto que se le mostrará al usuario.
 
 # Genera un TypeError si x no es un entero:
 x = "hello"
 
 if not type(x) is int:
-  raise TypeError("Sólo se permiten números enteros")
+    raise TypeError("Sólo se permiten números enteros")
 
 
 # raise  ->  permite lanzar una excepcion
@@ -76,34 +74,34 @@ if not type(x) is int:
 x = -1
 
 if x < 0:
-  raise Exception("Lo sentimos, no hay números por debajo de cero.")
-
-
-x = "hello"
-
-if not type(x) is int:
-  raise TypeError("Sólo se permiten números enteros")
-
-
+    raise Exception("Lo sentimos, no hay números por debajo de cero.")
 
 ## ----------------------- Creando excepciones propias ---------------------
 
-class AutenticateError (Exception):
-    def __init__(self, email):
-        # dentro del __ini__ (AQUI VA EL MENSAJE UE DESEAMOS QUE SALGA)
-        super().__init__(f"Error invalido {email}")
-        self.email = email
+#* Forma 1: con propiedad, cunando deseas guadar o capturar el email
+#* raise AutenticateError(email)
 
-    
+class AutenticateError(Exception):
+    def __init__(self, message, email):
+        # dentro del __ini__ (AQUI VA EL MENSAJE UE DESEAMOS QUE SALGA)
+        self.email = email
+        super().__init__(f"{message} {email}")
+
     def validacion_email(self):
         pass
 
+#* Forma 2: por default -> raise LoginError(mensaje)
+class LoginError(Exception):
+    pass
+
 # ejemplo ----------
+
 
 class PasswordCortaError(Exception):
     def __init__(self, password):
         self.password = password
         super().__init__(f"La contraseña '{password}' es demasiado corta")
+
 
 def validar_password(password):
     if len(password) < 6:
@@ -118,7 +116,7 @@ try:
 
 except PasswordCortaError as error:
     print("Error detectado")
-    print(error)
+    print(error.password)
 
 # ejemplo ---------------------------------
 
@@ -128,9 +126,6 @@ class AuthenticateError(Exception):
         self.email = email
         super().__init__(f"Email inválido: {email}")
 
-    def dominio_valido(self):
-        dominios_validos = ["@gmail.com", "@hotmail.com", "@undac.edu.pe"]
-        return any(self.email.endswith(d) for d in dominios_validos)
 
 def login(email):
     dominios_validos = ["@gmail.com", "@hotmail.com", "@undac.edu.pe"]
@@ -157,7 +152,7 @@ BaseException
      ├── TypeError
      ├── IndexError
      ├── FileNotFoundError
-
+     |-- etc
 
 👉 Nunca captures BaseException
 """

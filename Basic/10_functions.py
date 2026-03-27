@@ -41,7 +41,7 @@ def print_name(name, surname):
     print(f"{name} {surname}")
 
 
-print_name(surname="Moure", name="Brais")
+print_name(surname="LeoDev", name="Black")
 
 # Función con parámetros de entrada/argumentos por defecto
 
@@ -50,12 +50,12 @@ def print_name_with_default(name, surname, alias="Sin alias"):
     print(f"{name} {surname} {alias}")
 
 
-print_name_with_default("Brais", "Moure")
-print_name_with_default("Brais", "Moure", "MoureDev")
+print_name_with_default("LeoDev", "Black")
+print_name_with_default("LeoDev", "Black", "LeoDev2p")
 
 # Función con parámetros de entrada/argumentos arbitrarios
 
-# *args  ->  si no sabe cuantos argumetnos pasara (lo toma como tupla)
+# *args  ->  si no sabe cuantos argumentos pasara (lo toma como tupla)
 # **kwargs  -> si no sabe cuantos argumentos clave valor pasara (lo toma como diccinoario)
 
 def print_upper_texts(*texts):
@@ -64,5 +64,19 @@ def print_upper_texts(*texts):
         print(text.upper())
 
 
-print_upper_texts("Hola", "Python", "MoureDev")
+print_upper_texts("Hola", "Python", "LeoDev")
 print_upper_texts("Hola")
+
+
+#* OJO: 
+#* Empqueta *args **kwargs cuando se define en la funcion uqe se crea
+#* Desempaqueta *args **kwargs cuando se define en la llamada de la funcion creada
+
+"""
+def numero (*args): -> empaquetamos
+... print(args)
+
+
+num = (1, 2, 3, 4, 5)
+numero(*num) -> Desempaquetamos
+"""

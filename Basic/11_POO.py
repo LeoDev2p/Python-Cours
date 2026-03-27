@@ -240,10 +240,10 @@ class Person:
     self._name = name  # protegido ( solo indica tener cuidado)
     self.__age = age # privado
 
-p1 = Person("Isaias", 25)
+p1 = Person("Isaias", 22)
 print(p1._name)
 # print(p1.__age) # da error
-print (p1._Person__age)
+print (p1._Person__age) # asi accedemos a una propiedad privada
 
 # ejemplo encapsulamiento metodos
 

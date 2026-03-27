@@ -1,6 +1,6 @@
 # Clase en vídeo: https://youtu.be/Kp4Mvapo5kc?t=16335
 
-### Sets ###  --> es una colección desordenada , inmutable* y no indexada .
+### Sets ###  --> es una colección desordenada , mutable* y no indexada .
 
 # Definición
 
@@ -20,7 +20,7 @@ my_set.add("Isaias")            # Permite agregar un elemento al conjunto
 my_set.update ([1, 2, 3, 4])    # Permite agregar un iterable
 
 my_set.remove ("Cesar")   # Elimina el elemento del conjunto (si no esta da error)
-my_set.discard ("Quintana")  # Elimina el elemento del conjunto  (No nada error)
+my_set.discard ("Quintana")  # Elimina el elemento del conjunto  (No nada error) None
 my_set.pop ()           # Elimina un valor aleatorio (devuelve el valor eliminado)
 my_set.clear()          # Limpia el conjunto completo
 my_set.copy ()          # Copia los datos en un nuevo conjunto
@@ -44,7 +44,7 @@ intersection ()
 symetric_difference ()
 
 issubset ()   -> Devulve True si todos los elementos del set1 están dentro del set2
-issuperset () -> Devuelve True si todos set1 tiene todos los elementos del set2 
+issuperset () -> Devuelve True si el set1 tiene todos los elementos del set2 
 isdisjoint ()  -> Devuelve true si  no comparten elementos entre set
 """
 

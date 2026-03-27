@@ -93,6 +93,7 @@ fruits = ["apple", "banana", "cherry"]
 print("banana" in fruits)  # True
 print("pineapple" not in fruits)  # True
 
+
 # --------------- operadores aritmeticos de bit a bit ----------------- #
 
 """
@@ -111,8 +112,8 @@ print("pineapple" not in fruits)  # True
 EJEMPLO
 
 128 64 32 16 8 4 2 1
-               1 0 1  -> 5
-               1 1 1  -> 7
+    1  0  0  0 0 0 1  -> 65
+       1  0  0 0 1 0  -> 34
 """
 
 a = 0b101
