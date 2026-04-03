@@ -22,7 +22,6 @@ la instalación de dependencias y la gestión de entornos virtuales.
 
 #* ------------------------ uv en proyectos -------------------------
 
-#** ------------------------ Inicializacion -------------------------
 """
 >>> uv init    # por defecto funciona como uv init --app, creando un proyecto con una estructura de directorios y archivos predefinidos
 >>> uv init nombre-del-proyecto
@@ -32,7 +31,7 @@ la instalación de dependencias y la gestión de entornos virtuales.
 >>> uv --help   # Muestra la ayuda de uv para ver todas las opciones disponibles
 
 >>> uv add nombre-del-paquete  # Agregar una dependencia al proyecto
->>> uv remove nombre-del-proyecto  # Eliminar una dependencia del proyecto
+>>> uv remove nombre-del-paquete  # Eliminar una dependencia del proyecto
 >>> uv sync  # Sincronizar las dependencias del proyecto con el entorno
 
 >>> uv run nombre-del-archivo.py  # Ejecuta un comando en el entorno del proyecto (si tiene dependencias)

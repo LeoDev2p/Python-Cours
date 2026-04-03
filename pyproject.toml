@@ -1,0 +1,12 @@
+[project]
+name = "Cours Python"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "argon2-cffi>=25.1.0",
+    "cryptography>=46.0.6",
+    "pyexiftool>=0.5.6",
+    "pytest>=9.0.2",
+]
